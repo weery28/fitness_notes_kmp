@@ -1,3 +1,4 @@
 rootProject.name = 'fitness_notes_kmp'
-
+enableFeaturePreview('GRADLE_METADATA')
 include ':app'
+
