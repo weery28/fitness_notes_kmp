@@ -1,9 +1,7 @@
 package me.coweery.fitnessnotes.repository.token
 
-import com.russhwolf.settings.Settings
-
-class SettingsTokenRepository(
-    private val settings: Settings
+class KeyValueTokenRepository(
+    private val storage: KeyValueStore
 ) : TokenRepository {
 
     companion object {
@@ -11,10 +9,10 @@ class SettingsTokenRepository(
     }
 
     override fun get(): String? {
-        return settings.getString(TOKEN_KEY)
+        return storage.getString(TOKEN_KEY)
     }
 
     override fun save(token: String) {
-        settings.putString(TOKEN_KEY, token)
+        storage.putString(TOKEN_KEY, token)
     }
 }
