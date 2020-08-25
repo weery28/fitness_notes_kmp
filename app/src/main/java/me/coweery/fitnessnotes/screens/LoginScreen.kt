@@ -7,11 +7,10 @@ import android.widget.EditText
 import me.R
 import me.coweery.fitnessnotes.DI
 import me.coweery.fitnessnotes.presenters.login.LoginScreenContract
-import org.kodein.di.instance
 
 class LoginScreen : AppCompatActivity(), LoginScreenContract.View {
 
-    private val presenter by DI.kodein.instance<LoginScreenContract.Presenter>()
+    private val presenter = DI.provideLoginScreenPresenter()
 
     private val etLogin by lazy { findViewById<EditText>(R.id.et_login) }
     private val etPassword by lazy { findViewById<EditText>(R.id.et_password) }
@@ -30,6 +29,6 @@ class LoginScreen : AppCompatActivity(), LoginScreenContract.View {
     }
 
     override fun openMainScreen() {
-        println("login success")
+        etLogin.setText("Login success")
     }
 }
