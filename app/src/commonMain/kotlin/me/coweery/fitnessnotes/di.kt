@@ -1,6 +1,7 @@
 package me.coweery.fitnessnotes
 
-import com.github.florent37.preferences.Preferences
+import com.russhwolf.settings.Settings
+import com.russhwolf.settings.invoke
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
@@ -13,7 +14,7 @@ import me.coweery.fitnessnotes.presenters.splash.SplashScreenContract
 import me.coweery.fitnessnotes.presenters.splash.SplashScreenPresenter
 import me.coweery.fitnessnotes.repository.login.KtorLoginRepository
 import me.coweery.fitnessnotes.repository.login.LoginRepository
-import me.coweery.fitnessnotes.repository.token.PreferencesTokenRepository
+import me.coweery.fitnessnotes.repository.token.SettingsTokenRepository
 import me.coweery.fitnessnotes.repository.token.TokenRepository
 import me.coweery.fitnessnotes.services.login.LoginService
 import me.coweery.fitnessnotes.services.login.LoginServiceImpl
@@ -30,9 +31,9 @@ object DI {
     val kodein = DI {
 
         bind<SplashScreenContract.Presenter>() with provider { SplashScreenPresenter(instance()) }
-        bind<TokenRepository>() with singleton { PreferencesTokenRepository(instance()) }
+        bind<TokenRepository>() with singleton { SettingsTokenRepository(instance()) }
         bind<TokenService>() with singleton { TokenServiceImpl(instance()) }
-        bind<Preferences>() with singleton { Preferences() }
+        bind<Settings>() with singleton { Settings() }
 
         bind<HttpClient>() with singleton {
             HttpClient() {

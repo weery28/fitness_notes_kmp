@@ -1,9 +1,9 @@
 package me.coweery.fitnessnotes.repository.token
 
-import com.github.florent37.preferences.Preferences
+import com.russhwolf.settings.Settings
 
-class PreferencesTokenRepository(
-    private val preferences: Preferences
+class SettingsTokenRepository(
+    private val settings: Settings
 ) : TokenRepository {
 
     companion object {
@@ -11,10 +11,10 @@ class PreferencesTokenRepository(
     }
 
     override fun get(): String? {
-        return preferences.getString(TOKEN_KEY)
+        return settings.getString(TOKEN_KEY)
     }
 
     override fun save(token: String) {
-        preferences.setString(TOKEN_KEY, token)
+        settings.putString(TOKEN_KEY, token)
     }
 }
