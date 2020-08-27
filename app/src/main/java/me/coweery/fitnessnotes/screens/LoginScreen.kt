@@ -1,16 +1,16 @@
 package me.coweery.fitnessnotes.screens
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import android.widget.EditText
 import me.R
-import me.coweery.fitnessnotes.DI
 import me.coweery.fitnessnotes.presenters.login.LoginScreenContract
+import me.coweery.fitnessnotes.provideLoginScreenPresenter
 
 class LoginScreen : AppCompatActivity(), LoginScreenContract.View {
 
-    private val presenter = DI.provideLoginScreenPresenter()
+    private val presenter = provideLoginScreenPresenter()
 
     private val etLogin by lazy { findViewById<EditText>(R.id.et_login) }
     private val etPassword by lazy { findViewById<EditText>(R.id.et_password) }

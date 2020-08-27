@@ -1,15 +1,15 @@
 package me.coweery.fitnessnotes.screens
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import me.R
-import me.coweery.fitnessnotes.DI
+import me.coweery.fitnessnotes.kodein
 import me.coweery.fitnessnotes.presenters.splash.SplashScreenContract
 import org.kodein.di.instance
 
 class SplashScreen : AppCompatActivity(), SplashScreenContract.View {
 
-    private val presenter by DI.kodein.instance<SplashScreenContract.Presenter>()
+    private val presenter by kodein.instance<SplashScreenContract.Presenter>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

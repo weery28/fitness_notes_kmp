@@ -6,10 +6,13 @@ import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.features.logging.LogLevel
 import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
+import me.coweery.Database
 import me.coweery.fitnessnotes.presenters.login.LoginScreenContract
 import me.coweery.fitnessnotes.presenters.login.LoginScreenPresenter
 import me.coweery.fitnessnotes.presenters.splash.SplashScreenContract
 import me.coweery.fitnessnotes.presenters.splash.SplashScreenPresenter
+import me.coweery.fitnessnotes.repository.DriverFactory
+import me.coweery.fitnessnotes.repository.createDatabase
 import me.coweery.fitnessnotes.repository.login.KtorLoginRepository
 import me.coweery.fitnessnotes.repository.login.LoginRepository
 import me.coweery.fitnessnotes.repository.token.KeyValueStore
@@ -49,15 +52,22 @@ val kodein = DI {
         }
     }
 
+    bind<DriverFactory>() with singleton { DriverFactory() }
+    bind<Database>() with singleton { createDatabase(instance()) }
+
+
     bind<LoginRepository>() with singleton { KtorLoginRepository(instance()) }
     bind<LoginService>() with singleton { LoginServiceImpl(instance()) }
 
+
     bind<LoginScreenContract.Presenter>() with provider {
         LoginScreenPresenter(
+            instance(),
             instance(),
             instance()
         )
     }
 }
+
 
 fun provideLoginScreenPresenter() = kodein.direct.instance<LoginScreenContract.Presenter>()

@@ -1,0 +1,16 @@
+CREATE TABLE training (
+id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ,
+name TEXT NOT NULL,
+creationDate INTEGER,
+date INTEGER,
+isSynced INTEGER as Boolean,
+serverId INTEGER
+);
+
+selectAll:
+SELECT *
+FROM training;
+
+insert:
+INSERT INTO training(name, creationDate, date, isSynced, serverId)
+VALUES (?, ?, ?,?,?);
