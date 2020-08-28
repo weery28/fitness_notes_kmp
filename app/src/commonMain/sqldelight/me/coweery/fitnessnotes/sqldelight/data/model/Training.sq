@@ -1,9 +1,10 @@
 CREATE TABLE training (
 id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ,
 name TEXT NOT NULL,
-creationDate INTEGER,
+creationDate INTEGER NOT NULL,
 date INTEGER,
-isSynced INTEGER as Boolean,
+isSynced INTEGER as Boolean NOT NULL,
+isComplete INTEGER as Boolean NOT NULL,
 serverId INTEGER
 );
 
@@ -17,8 +18,8 @@ FROM training
 WHERE id = ?;
 
 insert:
-INSERT INTO training(name, creationDate, date, isSynced, serverId)
-VALUES (?, ?, ?,?,?);
+INSERT INTO training(name, creationDate, date, isSynced, serverId, isComplete)
+VALUES (?, ?, ?,?,?, ?);
 
 lastInserRowId:
 SELECT last_insert_rowid() FROM training;

@@ -8,10 +8,11 @@ interface TrainingService {
 
     fun save(
         name: String,
-        creationDate: Long?,
+        creationDate: Long,
         date: Long?,
-        isSynced: Boolean?,
-        serverId: Long?
+        isSynced: Boolean,
+        serverId: Long?,
+        isComplete : Boolean
     ): Training
 
     fun get(id: Long): Training

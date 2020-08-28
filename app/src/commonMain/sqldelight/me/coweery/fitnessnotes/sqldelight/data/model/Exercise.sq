@@ -1,0 +1,12 @@
+import java.lang.Float;
+
+CREATE TABLE exercise (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ,
+    name TEXT NOT NULL,
+    trainingId INTEGER NOT NULL,
+    weight REAL as Float,
+    count INTEGER NOT NULL,
+    sets INTEGER NOT NULL,
+    index INTEGER NOT NULL,
+    FOREIGN KEY (trainingId) REFERENCES training
+);

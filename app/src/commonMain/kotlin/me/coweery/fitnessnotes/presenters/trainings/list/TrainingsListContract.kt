@@ -1,6 +1,5 @@
 package me.coweery.fitnessnotes.presenters.trainings.list
 
-import io.ktor.util.date.GMTDate
 import me.coweery.fitnessnotes.mvp.BaseMvp
 import me.coweery.fitnessnotes.sqldelight.data.model.Training
 
@@ -23,6 +22,6 @@ interface TrainingsListContract {
 
         fun onTrainingClicked(id: Long)
 
-        fun onTrainingDataReceived(name : String, date : Long)
+        fun onTrainingDataReceived(name: String, date: Long)
     }
 }

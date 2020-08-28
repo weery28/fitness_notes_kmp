@@ -1,0 +1,8 @@
+CREATE TABLE set (
+        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ,
+        exerciceId INTEGER NOT NULL,
+        repsCount  INTEGER NOT NULL,
+        weight     REAL as Float NOT NULL,
+        index      INTEGER NOT NULL,
+        FOREIGN KEY (exerciceId) REFERENCES exercise
+);
