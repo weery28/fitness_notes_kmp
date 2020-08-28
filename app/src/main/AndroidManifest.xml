@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="me.coweery.fitnessnotes.screens.LoginScreen">
+        <activity android:name="me.coweery.fitnessnotes.screens.training.list.TrainingsScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

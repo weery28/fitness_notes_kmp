@@ -3,4 +3,7 @@
     <string name="login">Логин</string>
     <string name="password">Пароль</string>
     <string name="sign_in">Войти</string>
+    <string name="save">СОХРАНИТЬ</string>
+    <string name="training_name">Название тренировки</string>
+    <string name="date">Дата</string>
 </resources>
