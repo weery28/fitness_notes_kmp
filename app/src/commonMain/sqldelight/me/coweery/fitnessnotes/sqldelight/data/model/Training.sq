@@ -11,6 +11,14 @@ selectAll:
 SELECT *
 FROM training;
 
+findById:
+SELECT *
+FROM training
+WHERE id = ?;
+
 insert:
 INSERT INTO training(name, creationDate, date, isSynced, serverId)
 VALUES (?, ?, ?,?,?);
+
+lastInserRowId:
+SELECT last_insert_rowid() FROM training;

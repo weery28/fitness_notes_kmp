@@ -11,6 +11,8 @@ import me.coweery.fitnessnotes.presenters.login.LoginScreenContract
 import me.coweery.fitnessnotes.presenters.login.LoginScreenPresenter
 import me.coweery.fitnessnotes.presenters.splash.SplashScreenContract
 import me.coweery.fitnessnotes.presenters.splash.SplashScreenPresenter
+import me.coweery.fitnessnotes.presenters.trainings.list.TrainingsListContract
+import me.coweery.fitnessnotes.presenters.trainings.list.TrainingsListPresenter
 import me.coweery.fitnessnotes.repository.DriverFactory
 import me.coweery.fitnessnotes.repository.createDatabase
 import me.coweery.fitnessnotes.repository.login.KtorLoginRepository
@@ -22,6 +24,9 @@ import me.coweery.fitnessnotes.services.login.LoginService
 import me.coweery.fitnessnotes.services.login.LoginServiceImpl
 import me.coweery.fitnessnotes.services.token.TokenService
 import me.coweery.fitnessnotes.services.token.TokenServiceImpl
+import me.coweery.fitnessnotes.services.training.TrainingService
+import me.coweery.fitnessnotes.services.training.TrainingServiceImpl
+import me.coweery.fitnessnotes.sqldelight.data.model.TrainingQueries
 import org.kodein.di.DI
 import org.kodein.di.bind
 import org.kodein.di.direct
@@ -67,7 +72,14 @@ val kodein = DI {
             instance()
         )
     }
+
+    bind<TrainingService>() with singleton { TrainingServiceImpl(instance()) }
+    bind<TrainingQueries>() with provider { instance<Database>().trainingQueries }
+
+    bind<TrainingsListContract.Presenter>() with provider { TrainingsListPresenter(instance()) }
 }
 
 
 fun provideLoginScreenPresenter() = kodein.direct.instance<LoginScreenContract.Presenter>()
+
+fun provideTrainingsListPresenter() = kodein.direct.instance<TrainingsListContract.Presenter>()
