@@ -1,13 +1,7 @@
 package me.coweery.fitnessnotes.presenters.trainings.list
 
 import com.soywiz.klock.DateTime
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import me.coweery.fitnessnotes.mvp.Background
 import me.coweery.fitnessnotes.mvp.BasePresenter
-import me.coweery.fitnessnotes.mvp.Main
-import me.coweery.fitnessnotes.mvp.doInMain
 import me.coweery.fitnessnotes.services.training.TrainingService
 
 class TrainingsListPresenter(
@@ -16,11 +10,9 @@ class TrainingsListPresenter(
     TrainingsListContract.Presenter {
 
     override fun onScreenLoaded() {
-        GlobalScope.launch(Background) {
+        executeBlocking {
             val trainings = trainingService.getAll()
-            withContext(Main) {
-                view?.showTrainings(trainings)
-            }
+            executeInMain { view?.showTrainings(trainings) }
         }
     }
 
@@ -33,15 +25,16 @@ class TrainingsListPresenter(
     }
 
     override fun onTrainingDataReceived(name: String, date: Long) {
-        GlobalScope.launch(Background) {
+        executeBlocking {
             val training = trainingService.save(
                 name,
                 DateTime.nowUnixLong(),
                 date,
                 false,
-                null
+                null,
+                false
             )
-            doInMain { view?.showTrainingScreen(training.id) }
+            executeInMain { view?.showTrainingScreen(training.id) }
         }
     }
 }

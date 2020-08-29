@@ -1,0 +1,41 @@
+import java.lang.Float;
+
+CREATE TABLE exercise (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ,
+    name TEXT NOT NULL,
+    trainingId INTEGER NOT NULL,
+    weight REAL as Float,
+    count INTEGER NOT NULL,
+    sets INTEGER NOT NULL,
+    `index` INTEGER NOT NULL,
+    FOREIGN KEY (trainingId) REFERENCES training
+);
+
+insert:
+INSERT INTO exercise(name, trainingId, weight, count, sets, `index`)
+VALUES (?, ?, ?, ?, ?, ?);
+
+fetchByTrainingId:
+SELECT * FROM exercise
+WHERE trainingId = ?;
+
+delete:
+DELETE FROM exercise WHERE id = ?;
+
+updateById:
+UPDATE exercise
+SET name = ?, trainingId = ?, weight = ?, count = ?, sets = ?, `index` = ?
+WHERE id = :byId;
+
+lastInsertRowId:
+SELECT last_insert_rowid() FROM exercise;
+
+fetchByTrainingIdAndName:
+SELECT * FROM exercise
+WHERE trainingId = ? AND name = ?;
+
+getExerciseCount:
+SELECT count() FROM exercise
+WHERE exercise.trainingId = ?
+GROUP BY id;
+

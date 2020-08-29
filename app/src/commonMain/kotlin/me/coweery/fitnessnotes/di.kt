@@ -26,6 +26,7 @@ import me.coweery.fitnessnotes.services.token.TokenService
 import me.coweery.fitnessnotes.services.token.TokenServiceImpl
 import me.coweery.fitnessnotes.services.training.TrainingService
 import me.coweery.fitnessnotes.services.training.TrainingServiceImpl
+import me.coweery.fitnessnotes.sqldelight.data.model.ExerciseQueries
 import me.coweery.fitnessnotes.sqldelight.data.model.TrainingQueries
 import org.kodein.di.DI
 import org.kodein.di.bind
@@ -75,6 +76,7 @@ val kodein = DI {
 
     bind<TrainingService>() with singleton { TrainingServiceImpl(instance()) }
     bind<TrainingQueries>() with provider { instance<Database>().trainingQueries }
+    bind<ExerciseQueries>() with provider { instance<Database>().exerciseQueries }
 
     bind<TrainingsListContract.Presenter>() with provider { TrainingsListPresenter(instance()) }
 }

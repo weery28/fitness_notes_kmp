@@ -18,6 +18,7 @@ apply plugin: 'com.squareup.sqldelight'
 sqldelight {
     Database { // This will be the name of the generated database class.
         packageName = "me.coweery"
+        schemaOutputDirectory = file('src/commonMain/sqldelight')
     }
 }
 
@@ -37,7 +38,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId 'org.jetbrains.kotlin.mpp_app_android'
-        minSdkVersion 17
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName '1.0'
@@ -96,7 +97,7 @@ kotlin {
                 implementation "io.ktor:ktor-client-json:$ktor_version"
                 implementation("io.ktor:ktor-client-serialization:$ktor_version")
                 implementation "io.ktor:ktor-client-logging-native:$ktor_version"
-                implementation "com.soywiz.korlibs.klock:klock:1.8.4"
+                implementation "com.soywiz.korlibs.klock:klock:1.10.3"
             }
         }
         commonTest {

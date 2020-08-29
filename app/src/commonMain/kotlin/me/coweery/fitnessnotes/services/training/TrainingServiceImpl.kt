@@ -13,18 +13,19 @@ class TrainingServiceImpl(
 
     override fun save(
         name: String,
-        creationDate: Long?,
+        creationDate: Long,
         date: Long?,
-        isSynced: Boolean?,
-        serverId: Long?
+        isSynced: Boolean,
+        serverId: Long?,
+        isComplete: Boolean
     ): Training {
 
         var id: Long? = null
         trainingQueries.transaction {
-            trainingQueries.insert(name, creationDate, date, isSynced, serverId)
-            id = trainingQueries.lastInserRowId().executeAsOne()
+            trainingQueries.insert(name, creationDate, date, isSynced, serverId, isComplete)
+            id = trainingQueries.lastInsertRowId().executeAsOne()
         }
-        return Training.Impl(id!!, name, creationDate, date, isSynced, serverId)
+        return Training.Impl(id!!, name, creationDate, date, isSynced, isComplete, serverId)
     }
 
     override fun get(id: Long): Training {
