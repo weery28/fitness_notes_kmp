@@ -21,5 +21,19 @@ insert:
 INSERT INTO training(name, creationDate, date, isSynced, serverId, isComplete)
 VALUES (?, ?, ?,?,?, ?);
 
-lastInserRowId:
+lastInsertRowId:
 SELECT last_insert_rowid() FROM training;
+
+findLastWithExerciseExceptId:
+SELECT training.* FROM training
+JOIN exercise ON exercise.trainingId = training.id
+WHERE exercise.name = :exerciseName AND training.id != :exceptTrainingId
+ORDER BY training.date
+LIMIT 1;
+
+findLastWithExercise:
+SELECT training.* FROM training
+JOIN exercise ON exercise.trainingId = training.id
+WHERE exercise.name = :exerciseName
+ORDER BY training.date
+LIMIT 1;
