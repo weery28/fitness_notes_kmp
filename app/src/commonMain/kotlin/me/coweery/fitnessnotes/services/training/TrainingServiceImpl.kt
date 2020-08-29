@@ -23,7 +23,7 @@ class TrainingServiceImpl(
         var id: Long? = null
         trainingQueries.transaction {
             trainingQueries.insert(name, creationDate, date, isSynced, serverId, isComplete)
-            id = trainingQueries.lastInserRowId().executeAsOne()
+            id = trainingQueries.lastInsertRowId().executeAsOne()
         }
         return Training.Impl(id!!, name, creationDate, date, isSynced, isComplete, serverId)
     }
