@@ -11,6 +11,8 @@ import me.coweery.fitnessnotes.presenters.login.LoginScreenContract
 import me.coweery.fitnessnotes.presenters.login.LoginScreenPresenter
 import me.coweery.fitnessnotes.presenters.splash.SplashScreenContract
 import me.coweery.fitnessnotes.presenters.splash.SplashScreenPresenter
+import me.coweery.fitnessnotes.presenters.trainings.TrainingScreenContract
+import me.coweery.fitnessnotes.presenters.trainings.TrainingScreenPresenter
 import me.coweery.fitnessnotes.presenters.trainings.list.TrainingsListContract
 import me.coweery.fitnessnotes.presenters.trainings.list.TrainingsListPresenter
 import me.coweery.fitnessnotes.repository.DriverFactory
@@ -20,13 +22,18 @@ import me.coweery.fitnessnotes.repository.login.LoginRepository
 import me.coweery.fitnessnotes.repository.token.KeyValueStore
 import me.coweery.fitnessnotes.repository.token.KeyValueTokenRepository
 import me.coweery.fitnessnotes.repository.token.TokenRepository
+import me.coweery.fitnessnotes.services.exercise.ExerciseService
+import me.coweery.fitnessnotes.services.exercise.ExerciseServiceImpl
 import me.coweery.fitnessnotes.services.login.LoginService
 import me.coweery.fitnessnotes.services.login.LoginServiceImpl
+import me.coweery.fitnessnotes.services.set.SetService
+import me.coweery.fitnessnotes.services.set.SetServiceImpl
 import me.coweery.fitnessnotes.services.token.TokenService
 import me.coweery.fitnessnotes.services.token.TokenServiceImpl
 import me.coweery.fitnessnotes.services.training.TrainingService
 import me.coweery.fitnessnotes.services.training.TrainingServiceImpl
 import me.coweery.fitnessnotes.sqldelight.data.model.ExerciseQueries
+import me.coweery.fitnessnotes.sqldelight.data.model.SetQueries
 import me.coweery.fitnessnotes.sqldelight.data.model.TrainingQueries
 import org.kodein.di.DI
 import org.kodein.di.bind
@@ -74,11 +81,17 @@ val kodein = DI {
         )
     }
 
+
     bind<TrainingService>() with singleton { TrainingServiceImpl(instance()) }
+    bind<SetService>() with singleton { SetServiceImpl(instance()) }
+    bind<ExerciseService>() with singleton { ExerciseServiceImpl(instance(), instance(), instance()) }
+
     bind<TrainingQueries>() with provider { instance<Database>().trainingQueries }
     bind<ExerciseQueries>() with provider { instance<Database>().exerciseQueries }
+    bind<SetQueries>() with provider { instance<Database>().setQueries }
 
     bind<TrainingsListContract.Presenter>() with provider { TrainingsListPresenter(instance()) }
+    bind<TrainingScreenContract.Presenter>() with provider { TrainingScreenPresenter(instance(), instance()) }
 }
 
 

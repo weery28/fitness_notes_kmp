@@ -27,3 +27,21 @@ WHERE exercise.trainingId = :trainingId;
 
 fetchByExerciseId:
 SELECT * FROM `set` WHERE exerciseId = ?;
+
+insert:
+INSERT INTO `set` (exerciseId, repsCount, weight, `index`)
+VALUES (?,?,?,?);
+
+updateById:
+UPDATE `set` SET exerciseId = ?, repsCount = ?, weight = ?, `index` = ?
+WHERE id = :byId;
+
+fetchById:
+SELECT * FROM `set` WHERE id = ?;
+
+lastInsertRowId:
+SELECT last_insert_rowid() FROM `set`;
+
+delete:
+DELETE FROM `set` WHERE id = ?;
+

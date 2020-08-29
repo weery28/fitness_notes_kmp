@@ -13,12 +13,29 @@ class TrainingScreenPresenter(
 ) : BasePresenter<TrainingScreenContract.View>(),
     TrainingScreenContract.Presenter {
 
+    private var mTrainingId = -1L
+
     override fun onTrainingReceived(trainingId: Long) {
-        TODO("Not yet implemented")
+
+        mTrainingId = trainingId
+
+        executeBlocking {
+            exercisesService.getFullByTrainingId(trainingId)
+                .asSequence()
+                .sortedBy { it.exercise.index }
+                .forEach {
+                    executeInMain {
+                        view?.showExercise(it.exercise)
+                        it.sets.forEach {
+                            view?.showSet(it)
+                        }
+                    }
+                }
+        }
     }
 
     override fun onAddExercisesClicked() {
-        TODO("Not yet implemented")
+        view?.showCreateExerciseInput(mTrainingId)
     }
 
     override fun onExercisesDataReceived(exercise: Exercise) {
